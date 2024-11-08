@@ -1,0 +1,244 @@
+<html></html>
+ <head>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <script>
+   document.addEventListener('DOMContentLoaded', (event) => {
+      let time = 59 * 60 + 59; // 59 minutes and 59 seconds
+
+      function updateTimer() {
+        const minutes = Math.floor(time / 60);
+        const seconds = time % 60;
+        document.getElementById('timer').textContent = `${String(minutes).padStart(2, '0')} : ${String(seconds).padStart(2, '0')}`;
+        
+        if (time > 0) {
+          time--;
+        } else {
+          document.getElementById('qrisImage').style.display = 'none';
+          document.getElementById('expiredMessage').style.display = 'block';
+        }
+      }
+
+      setInterval(updateTimer, 1000);
+      updateTimer();
+
+      document.getElementById('cancelButton').addEventListener('click', function() {
+        window.location.href = 'pembayaran.html';
+      });
+
+      // Get the total price from localStorage
+      const totalPrice = localStorage.getItem('totalPrice');
+      if (totalPrice) {
+          document.getElementById('ticketPriceDisplay').innerText = "Harga Tiket: Rp " + parseInt(totalPrice).toLocaleString();
+          document.getElementById('totalPaymentDisplay').innerText = "Total Pembayaran: Rp " + parseInt(totalPrice).toLocaleString();
+      }
+    });
+  </script>
+  <style>
+   .btn-cancel {
+      background-color: transparent;
+      color: #f8f9fa;
+      border: 2px solid #f8f9fa;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-cancel::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 300%;
+      height: 300%;
+      background-color: rgba(0, 123, 255, 0.5);
+      transition: all 0.75s;
+      border-radius: 50%;
+      z-index: 0;
+      transform: translate(-50%, -50%) scale(0);
+    }
+
+    .btn-cancel:hover::before {
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .btn-cancel:hover {
+      color: #1c1c1c;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-cancel span {
+      position: relative;
+      z-index: 1;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #1f1c2c 0%, #928dab 100%);
+      color: #ffffff;
+    }
+  </style>
+ </head>
+ <body class="min-h-screen flex flex-col">
+  <header class="bg-gray-900 text-white p-4 shadow-lg">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-2xl font-bold md:text-3xl">
+        SIGMA Bioskop
+      </h1>
+      <nav class="hidden md:block">
+        <ul class="flex space-x-4">
+          <li>
+            <a class="hover:text-gray-300" href="dasboard.html">
+              Beranda
+            </a>
+          </li>
+          <li>
+            <a class="hover:text-gray-300" href="#tentang">
+              Tentang
+            </a>
+          </li>
+          <li>
+            <a class="hover:text-gray-300" href="#blog">
+              Blog
+            </a>
+          </li>
+          <li>
+            <a class="hover:text-gray-300" href="index.html">
+              Logout
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <button class="md:hidden" id="menu-button">
+        <i class="fas fa-bars text-xl"></i>
+      </button>
+    </div>
+    <nav class="hidden md:hidden" id="mobile-menu">
+      <ul class="flex flex-col space-y-4 mt-4">
+        <li>
+          <a class="hover:text-gray-300" href="#">
+            Beranda
+          </a>
+        </li>
+        <li>
+          <a class="hover:text-gray-300" href="#">
+            Tentang
+          </a>
+        </li>
+        <li>
+          <a class="hover:text-gray-300" href="#">
+            Blog
+          </a>
+        </li>
+        <li>
+          <a class="hover:text-gray-300" href="#">
+            Logout
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <div class="flex-grow flex items-center justify-center mt-2">
+    <div class="container mx-auto p-8 bg-gray-900 rounded-lg shadow-2xl">
+      <div class="flex justify-between items-center mb-8">
+        <h1 class="text-5xl font-bold text-yellow-400">
+          Menunggu Pembayaran
+        </h1>
+        <button class="btn-cancel text-lg" id="cancelButton">
+          <span>Batal</span>
+        </button>
+      </div>
+      <div class="flex flex-col md:flex-row">
+        <div class="w-full md:w-1/2 pr-0 md:pr-8 mb-6 md:mb-0">
+          <h2 class="text-2xl font-semibold mb-6 text-yellow-400">
+            Cara melakukan pembayaran
+          </h2>
+          <div class="flex items-start mb-6">
+            <img alt="Illustration of opening e-Wallet or M-Banking app" class="w-16 h-16 mr-4" height="64" src="https://storage.googleapis.com/a1aa/image/MyIrGwl1727JHBVLpBBN2K6AeGpf1qgJRpIaP6rNc3rJkxtTA.jpg" width="64"/>
+            <p class="text-lg text-gray-300">
+              1. Buka aplikasi e-Wallet atau M-Banking yang memiliki fasilitas scan/upload QRIS.
+            </p>
+          </div>
+          <div class="flex items-start mb-6">
+            <img alt="Illustration of scanning QR code" class="w-16 h-16 mr-4" height="64" src="https://storage.googleapis.com/a1aa/image/BbGfw2wNHRQsCqz9o8SfoWPrkf1uf24Wom5XXXRU8KFegMudC.jpg" width="64"/>
+            <p class="text-lg text-gray-300">
+              2. Pindai QR Code ke layar kamu
+            </p>
+          </div>
+          <div class="flex items-start mb-6">
+            <img alt="Illustration of checking payment details" class="w-16 h-16 mr-4" height="64" src="https://storage.googleapis.com/a1aa/image/ZAyrvkeHyvTaXq05FfZdgeVogPDcVefUK7BZzW6WpKn1gMudC.jpg" width="64"/>
+            <p class="text-lg text-gray-300">
+              3. Periksa kembali detail pembayaran
+            </p>
+          </div>
+          <div class="flex items-start mb-6">
+            <img alt="Illustration of confirming and paying" class="w-16 h-16 mr-4" height="64" src="https://storage.googleapis.com/a1aa/image/Pw3DPBVyhwqIEd7em4auUGIvOBBHhRlwhgsiYN4mGr2Fy42JA.jpg" width="64"/>
+            <p class="text-lg text-gray-300">
+              4. Jika sudah sesuai, konfirmasi dan bayar
+            </p>
+          </div>
+        </div>
+        <div class="w-full md:w-1/2 pl-0 md:pl-8">
+          <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+            <div class="flex justify-between items-center mb-6">
+              <p class="text-gray-400 text-lg">
+                Sisa waktu pembayaran kamu
+              </p>
+              <p class="text-yellow-400 text-xl font-bold" id="timer">
+                00 : 59 : 59
+              </p>
+            </div>
+            <h2 class="text-yellow-400 text-xl font-semibold mb-6">
+              Pindai QR Code di bawah, kemudian bayar
+            </h2>
+            <div class="bg-black p-6 rounded-lg">
+              <img alt="QR code for payment" class="mx-auto mb-6 w-full h-auto" height="300" id="qrisImage" src="img/bayar/QRIS.jpeg" width="300"/>
+              <p class="text-center text-white text-lg">
+                SIGMA BIOSKOP
+              </p>
+              <p class="text-center text-white text-lg">
+                Menerima pembayaran melalui aplikasi di bawah ini
+              </p>
+              <p class="text-center text-white text-xl font-bold">
+                E-Wallet atau M-Banking
+              </p>
+              <p class="text-center text-yellow-400 text-xl font-bold" id="ticketPriceDisplay">Harga Tiket: Rp 0</p>
+              <p class="text-center text-yellow-400 text-xl font-bold" id="totalPaymentDisplay">Total Pembayaran: Rp 0</p>
+              <div class="text-center mt-4">
+                <a href="img/bayar/QRIS.jpeg" download class="text-yellow-400 hover:text-yellow-300">
+                  <i class="fas fa-download text-2xl"></i> Unduh QRIS
+                </a>
+              </div>
+              <div class="text-center mt-6">
+                <button class="bg-green-500 text-white px-6 py-2 rounded-lg text-lg transition duration-300 hover:bg-green-700" onclick="confirmPayment()">
+                  Saya Sudah Bayar
+                </button>
+              </div>
+              <div class="text-center mt-6 hidden" id="downloadTicketButton">
+                <a href="img/tiket/E-tiket.png" download class="bg-yellow-500 text-white px-6 py-2 rounded-lg text-lg transition duration-300 hover:bg-yellow-600">
+                  Unduh E-Tiket
+                </a>
+              </div>
+            </div>
+            <div class="hidden text-center text-red-500 text-lg font-bold mt-6" id="expiredMessage">
+              Waktu pembayaran telah habis. Silakan coba lagi.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    function confirmPayment() {
+      alert('Terima kasih! Pembayaran Anda telah dikonfirmasi.');
+      // Menampilkan tombol unduh E-Tiket setelah konfirmasi pembayaran
+      document.getElementById('downloadTicketButton').classList.remove('hidden');
+    }
+  </script>
+ </body>
+</html>

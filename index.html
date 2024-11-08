@@ -1,0 +1,99 @@
+<html lang="id"></html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Login - SIGMA Bioskop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1f1c2c 0%, #928dab 100%);
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding-top: 80px;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div id="login-container" class="bg-black bg-opacity-70 p-16 rounded-lg shadow-lg w-full max-w-lg">
+        <h2 class="text-center text-3xl mb-8">Masuk</h2>
+        <form onsubmit="handleLogin(event)">
+            <input type="text" placeholder="Email" required class="w-full p-4 mb-6 rounded bg-white text-black text-lg"/>
+            <input type="password" placeholder="Password" required class="w-full p-4 mb-6 rounded bg-white text-black text-lg"/>
+            <button type="submit" class="w-full p-4 bg-red-500 rounded text-white text-xl hover:bg-red-600 transition duration-300">Masuk</button>
+        </form>
+        <div class="text-center mt-6">
+            <p>Belum punya akun? <a href="#" class="underline" onclick="showRegister()">Daftar di sini</a></p>
+        </div>
+    </div>
+
+    <div id="register-container" class="hidden bg-black bg-opacity-70 p-16 rounded-lg shadow-lg w-full max-w-lg">
+        <h2 class="text-center text-3xl mb-8">Daftar</h2>
+        <form onsubmit="handleRegister(event)">
+            <input type="text" placeholder="Nama Lengkap" required class="w-full p-4 mb-6 rounded bg-white text-black text-lg"/>
+            <input type="text" placeholder="Email" required class="w-full p-4 mb-6 rounded bg-white text-black text-lg"/>
+            <input type="password" placeholder="Password" required class="w-full p-4 mb-6 rounded bg-white text-black text-lg"/>
+            <input type="password" placeholder="Konfirmasi Password" required class="w-full p-4 mb-6 rounded bg-white text-black text-lg"/>
+            <button type="submit" class="w-full p-4 bg-red-500 rounded text-white text-xl hover:bg-red-600 transition duration-300">Daftar</button>
+        </form>
+        <div class="text-center mt-6">
+            <p>Sudah punya akun? <a href="#" class="underline" onclick="showLogin()">Masuk di sini</a></p>
+        </div>
+    </div>
+
+    <div id="success-popup" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+        <div class="bg-white p-8 rounded-lg shadow-lg text-black text-center">
+            <h2 class="text-2xl mb-4">Pendaftaran Berhasil!</h2>
+            <p class="mb-6">Akun Anda telah berhasil didaftarkan.</p>
+            <button onclick="closePopup()" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition duration-300">Tutup</button>
+        </div>
+    </div>
+
+    <script>
+        let isRegistered = false;
+
+        function showRegister() {
+            document.getElementById('login-container').classList.add('hidden');
+            document.getElementById('register-container').classList.remove('hidden');
+        }
+
+        function showLogin() {
+            document.getElementById('login-container').classList.remove('hidden');
+            document.getElementById('register-container').classList.add('hidden');
+        }
+
+        function handleRegister(event) {
+            event.preventDefault();
+            isRegistered = true;
+            document.getElementById('success-popup').classList.remove('hidden');
+        }
+
+        function closePopup() {
+            document.getElementById('success-popup').classList.add('hidden');
+            showLogin();
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            if (isRegistered) {
+                window.location.href = 'dasboard.html';
+            } else {
+                alert('Harap mendaftar terlebih dahulu.');
+            }
+        }
+    </script>
+</body>
+</html>

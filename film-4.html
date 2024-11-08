@@ -1,0 +1,524 @@
+<html></html>
+<head>
+    <body>
+        <header class="bg-gray-900 text-white p-4 shadow-lg fade-in">
+         <div class="container mx-auto flex justify-between items-center">
+          <h1 class="text-2xl font-bold md:text-3xl">
+           SIGMA Bioskop
+          </h1>
+          <nav class="hidden md:block">
+           <ul class="flex space-x-4">
+            <li>
+             <a class="hover:text-gray-300" href="dasboard.html">
+              Beranda
+             </a>
+            </li>
+            <li>
+             <a class="hover:text-gray-300" href="#tentang">
+              Tentang
+             </a>
+            </li>
+            <li>
+          <a class="hover:text-gray-300" href="#blog">
+              Blog
+             </a>
+            </li>
+            <li>
+             <a class="hover:text-gray-300" href="index.html">
+              Logout
+             </a>
+            </li>
+           </ul>
+          </nav>
+          <button class="md:hidden" id="menu-button">
+           <i class="fas fa-bars text-xl">
+           </i>
+          </button>
+         </div>
+         <nav class="hidden md:hidden" id="mobile-menu">
+          <ul class="flex flex-col space-y-4 mt-4">
+           <li>
+            <a class="hover:text-gray-300" href="#">
+             Beranda
+            </a>
+           </li>
+            <a class="hover:text-gray-300" href="#">
+             Tentang
+            </a>
+           </li>
+           <li>
+            <a class="hover:text-gray-300" href="#">
+            Blog
+            </a>
+           </li>
+          </li>
+          <li>
+           <a class="hover:text-gray-300" href="#">
+           logout
+           </a>
+          </li>
+          </ul>
+         </nav>
+        </header>
+    <title>BOBOBOY GALAXY WINDARA</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1f1c2c 0%, #928dab 100%);
+            color: #ffffff;
+        }
+        .container {
+            display: flex;
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+            background-color: rgba(44, 44, 44, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        .poster {
+            flex: 1;
+            text-align: center;
+        }
+        .poster-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .poster-content img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 10px;
+        }
+        .poster-content a {
+            margin-top: 10px;
+        }
+        .details {
+            flex: 2;
+            padding-left: 20px;
+            color: #f8f9fa;
+        }
+        .details h1 {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .details p {
+            margin: 5px 0;
+            color: #ddd;
+        }
+        .details p span {
+            font-weight: bold;
+            color: #ffc107;
+        }
+        .details .buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .details .buttons a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+            padding: 10px 20px;
+            border: 1px solid #007bff;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .details .buttons a:hover {
+            background-color: #007bff;
+            color: white;
+        }
+        .synopsis {
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+            background-color: rgba(44, 44, 44, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            margin-top: 20px;
+        }
+        .synopsis h2 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #ffc107;
+        }
+        .synopsis p {
+            color: #ddd;
+            line-height: 1.6;
+        }
+        .buy-ticket {
+            background-color: #ffc107;
+            color: black;
+            padding: 10px 20px;
+            text-align: center;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .buy-ticket:hover {
+            background-color: #e0a800;
+        }
+        #trailerModal, #developmentModal, #selectTicketModal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            max-width: 90%;
+            overflow: hidden;
+        }
+        #trailerVideo {
+            width: 100%;
+            height: 315px;
+        }
+        .modal-background {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #c9302c;
+        }
+        .ticket {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .ticket:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+        .ticket .ticket-info {
+            flex: 1;
+        }
+        .ticket .ticket-info h3 {
+            margin: 0;
+            font-size: 18px;
+            color: #333;
+        }
+        .ticket .ticket-info p {
+            margin: 5px 0;
+            color: #666;
+        }
+        .ticket .ticket-price {
+            font-size: 18px;
+            color: #333;
+            font-weight: bold;
+        }
+        .tickets-container {
+            display: none;
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+            background-color: rgba(44, 44, 44, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            margin-top: 20px;
+        }
+        .modal-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .modal-content {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .modal-content.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .modal-content h2, .modal-content p, .modal-content label, .modal-content select, .modal-content button {
+            color: #333;
+        }
+        .showtimes button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .showtimes button:hover {
+            background-color: #0056b3;
+        }
+
+        .showtimes button:disabled {
+            background-color: #6c757d;
+            color: #ffffff;
+            cursor: not-allowed;
+        }
+
+        .showtimes button:disabled:hover {
+            background-color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="poster">
+            <div class="poster-content">
+                <img alt="Movie poster of BOBOBOY GALAXY WINDARA featuring the main characters in a dramatic pose with a dark, intense background" height="450" src="img/film-4.jpeg" width="300"/>
+                <a class="buy-ticket" href="#ticketsContainer" onclick="showTickets(); return false;">Buy Ticket</a>
+            </div>
+        </div>
+        <div class="details">
+            <h1>BOBOBOY GALAXY WINDARA</h1>
+            <p><span>Jenis Film</span>:Animasi, Petualangan, Aksi, Fiksi Ilmiah.</p>
+            <p><span>Produser</span>:Nizam Razak</p>
+            <p><span>Sutradara</span>:Nizam Razak</p>
+            <p><span>Penulis</span>:Anas Abdul Aziz</p>
+            <p><span>Produksi</span>:Animonsta Studios</p>
+            <p><span>Casts</span>:BoBoiBoy (Nur Sarah Alisya),Yaya (Yap Ee Jean),Gopal (Dzubir Mohammed Zakaria),Fang (Wong Wai Kay),Ying (Chan Su Ling),Papa Zola (Mohd Fathi Diaz),Komandan Kokoci (Nizam Razak)</p>
+            <div class="buttons">
+                <a href="#" onclick="showTrailer(); return false;">Watch Trailer</a>
+            </div>
+        </div>
+    </div>
+    <div class="synopsis">
+        <h2>SINOPSIS</h2>
+        <p>BoBoiBoy Galaxy: Windara mengikuti petualangan BoBoiBoy dan timnya saat mereka menjelajahi galaksi untuk mencari kekuatan elemental baru dan artefak legendaris, Windara, yang memiliki kekuatan angin luar biasa. Windara diyakini sebagai kunci untuk menghentikan invasi alien yang mengancam perdamaian di galaksi. Namun, dalam perjalanannya, mereka harus berhadapan dengan kelompok musuh baru, para penjahat luar angkasa yang juga mengincar kekuatan Windara. Dengan tantangan baru yang menguji kekuatan dan persahabatan mereka, BoBoiBoy dan teman-temannya harus menggunakan semua elemen mereka untuk melindungi galaksi dari kehancuran.</p>
+    </div>
+    <div class="tickets-container" id="ticketsContainer">
+        <div class="ticket">
+            <div class="ticket-info">
+                <h3>ARTHA GADING XXI</h3>
+                <p class="ticket-date">23-11-2024</p>
+                <div class="showtimes">
+                    <button onclick="showSelectTicketModal('ARTHA GADING XXI', '12:15')">12:15</button>
+                    <button onclick="showSelectTicketModal('ARTHA GADING XXI', '14:20')" disabled>14:20</button>
+                    <button onclick="showSelectTicketModal('ARTHA GADING XXI', '16:25')">16:25</button>
+                    <button onclick="showSelectTicketModal('ARTHA GADING XXI', '18:30')">18:30</button>
+                    <button onclick="showSelectTicketModal('ARTHA GADING XXI', '20:35')">20:35</button>
+                </div>
+            </div>
+            <div class="ticket-price">Rp 45,000</div>
+        </div>
+        <div class="ticket">
+            <div class="ticket-info">
+                <h3>BASSURA XXI</h3>
+                <p class="ticket-date">23-10-2024</p>
+                <div class="showtimes">
+                    <button onclick="showSelectTicketModal('BASSURA XXI', '12:15')">12:15</button>
+                    <button onclick="showSelectTicketModal('BASSURA XXI', '14:20')">14:20</button>
+                    <button onclick="showSelectTicketModal('BASSURA XXI', '16:25')" disabled>16:25</button>
+                    <button onclick="showSelectTicketModal('BASSURA XXI', '18:30')">18:30</button>
+                    <button onclick="showSelectTicketModal('BASSURA XXI', '20:35')">20:35</button>
+                </div>
+            </div>
+            <div class="ticket-price">Rp 40,000</div>
+        </div>
+        <div class="ticket">
+            <div class="ticket-info">
+                <h3>BAYWALK PLUIT XXI</h3>
+                <p class="ticket-date">23-10-2024</p>
+                <div class="showtimes">
+                    <button onclick="showSelectTicketModal('BAYWALK PLUIT XXI', '12:15')">12:15</button>
+                    <button onclick="showSelectTicketModal('BAYWALK PLUIT XXI', '14:20')" disabled>14:20</button>
+                    <button onclick="showSelectTicketModal('BAYWALK PLUIT XXI', '16:25')">16:25</button>
+                    <button onclick="showSelectTicketModal('BAYWALK PLUIT XXI', '18:30')">18:30</button>
+                    <button onclick="showSelectTicketModal('BAYWALK PLUIT XXI', '20:35')">20:35</button>
+                </div>
+            </div>
+            <div class="ticket-price">Rp 35,000</div>
+        </div>
+        <div class="ticket">
+            <div class="ticket-info">
+                <h3>BLOK M SQUARE</h3>
+                <p class="ticket-date">23-10-2024</p>
+                <div class="showtimes">
+                    <button onclick="showSelectTicketModal('BLOK M SQUARE', '12:15')">12:15</button>
+                    <button onclick="showSelectTicketModal('BLOK M SQUARE', '14:20')">14:20</button>
+                    <button onclick="showSelectTicketModal('BLOK M SQUARE', '16:25')" disabled>16:25</button>
+                    <button onclick="showSelectTicketModal('BLOK M SQUARE', '18:30')">18:30</button>
+                    <button onclick="showSelectTicketModal('BLOK M SQUARE', '20:35')">20:35</button>
+                </div>
+            </div>
+            <div class="ticket-price">Rp 30,000</div>
+        </div>
+        <div class="ticket">
+            <div class="ticket-info">
+                <h3>BLOK M XXI</h3>
+                <p class="ticket-date">23-10-2024</p>
+                <div class="showtimes">
+                    <button onclick="showSelectTicketModal('BLOK M XXI', '12:30')">12:30</button>
+                    <button onclick="showSelectTicketModal('BLOK M XXI', '14:35')" disabled>14:35</button>
+                    <button onclick="showSelectTicketModal('BLOK M XXI', '16:40')">16:40</button>
+                    <button onclick="showSelectTicketModal('BLOK M XXI', '18:45')">18:45</button>
+                    <button onclick="showSelectTicketModal('BLOK M XXI', '20:50')">20:50</button>
+                </div>
+            </div>
+            <div class="ticket-price">Rp 45,000</div>
+        </div>
+    </div>
+    <div class="modal-background" id="modalBackground" onclick="closeTrailer()"></div>
+    <div id="trailerModal">
+        <iframe id="trailerVideo" src="" frameborder="0" allowfullscreen></iframe>
+        <button onclick="closeTrailer()">Close</button>
+    </div>
+
+    </div>
+    <div class="modal-background" id="developmentModalBackground" onclick="closeDevelopmentModal()" style="display: none;"></div>
+    <div class="modal-background" id="selectTicketModalBackground" onclick="closeSelectTicketModal()"></div>
+    <div id="selectTicketModal" style="display: none;">
+        <div class="modal-content">
+            <h2>Pilih Tiket</h2>
+            <p id="selectedTheater"></p>
+            <p id="selectedTime"></p>
+            <p id="ticketPriceDisplay">Harga Tiket: Rp 0</p>
+            <label for="ticketQuantity">Jumlah Tiket:</label>
+            <select id="ticketQuantity" onchange="updateTotalPrice(selectedTheater)">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <div class="modal-buttons">
+                <button onclick="closeSelectTicketModal()">Close</button>
+                <button onclick="continueBooking()">Continue</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        const ticketPrices = {
+            'ARTHA GADING XXI': 45000,
+            'BASSURA XXI': 40000,
+            'BAYWALK PLUIT XXI': 35000,
+            'BLOK M SQUARE': 30000,
+            'BLOK M XXI': 45000
+        };
+
+        let selectedTheater = '';
+
+        function showTrailer() {
+            const trailerUrl = "https://www.youtube.com/embed/xs4VmBZIS6c";
+            document.getElementById('trailerVideo').src = trailerUrl;
+            document.getElementById('trailerModal').style.display = 'block';
+            document.getElementById('modalBackground').style.display = 'block';
+        }
+
+        function closeTrailer() {
+            document.getElementById('trailerVideo').src = "";
+            document.getElementById('trailerModal').style.display = 'none';
+            document.getElementById('modalBackground').style.display = 'none';
+        }
+
+        function showDevelopmentModal() {
+            document.getElementById('developmentModal').style.display = 'block';
+            document.getElementById('developmentModalBackground').style.display = 'block';
+        }
+
+        function closeDevelopmentModal() {
+            document.getElementById('developmentModal').style.display = 'none';
+            document.getElementById('developmentModalBackground').style.display = 'none';
+        }
+
+        function showTickets() {
+            document.getElementById('ticketsContainer').style.display = 'block';
+            document.getElementById('ticketsContainer').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function showSelectTicketModal(theater, time) {
+            selectedTheater = theater;
+            document.getElementById('selectedTheater').innerText = "Theater: " + theater;
+            document.getElementById('selectedTime').innerText = "Time: " + time;
+            document.getElementById('selectTicketModal').style.display = 'block';
+            document.getElementById('selectTicketModalBackground').style.display = 'block';
+            setTimeout(() => {
+                document.querySelector('#selectTicketModal .modal-content').classList.add('show');
+            }, 10);
+            updateTotalPrice(theater);
+        }
+
+        function updateTotalPrice(theater) {
+            const quantity = document.getElementById('ticketQuantity').value;
+            const pricePerTicket = ticketPrices[theater];
+            const totalPrice = pricePerTicket * quantity;
+            document.getElementById('ticketPriceDisplay').innerText = "Harga Tiket: Rp " + totalPrice.toLocaleString();
+            
+            // Update total payment display for QRIS
+            document.getElementById('totalPaymentDisplay').innerText = "Total Pembayaran: Rp " + totalPrice.toLocaleString();
+        }
+
+        function closeSelectTicketModal() {
+            document.querySelector('#selectTicketModal .modal-content').classList.remove('show');
+            setTimeout(() => {
+                document.getElementById('selectTicketModal').style.display = 'none';
+                document.getElementById('selectTicketModalBackground').style.display = 'none';
+            }, 300);
+        }
+
+        function continueBooking() {
+            const quantity = document.getElementById('ticketQuantity').value;
+            const pricePerTicket = ticketPrices[selectedTheater];
+            const totalPrice = pricePerTicket * quantity;
+
+            // Store the total price in localStorage
+            localStorage.setItem('totalPrice', totalPrice);
+
+            // Redirect to qris.html
+            window.location.href = "pembayaran.html";
+        }
+
+        function updateTicketDates() {
+            const today = new Date();
+            const day = String(today.getDate()).padStart(2, '0'); // Mendapatkan hari
+            const month = String(today.getMonth() + 1).padStart(2, '0'); // Mendapatkan bulan (0-indexed)
+            const year = today.getFullYear(); // Mendapatkan tahun
+
+            const formattedDate = `${day}-${month}-${year}`; // Format tanggal menjadi DD-MM-YYYY
+
+            // Mengupdate semua elemen dengan kelas 'ticket-date'
+            const dateElements = document.querySelectorAll('.ticket-date');
+            dateElements.forEach(element => {
+                element.innerText = formattedDate; // Mengganti isi dengan tanggal hari ini
+            });
+        }
+
+        // Panggil fungsi saat halaman dimuat
+        window.onload = function() {
+            updateTicketDates();
+        };
+    </script>
+</body>
+</html>

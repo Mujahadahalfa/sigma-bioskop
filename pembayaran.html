@@ -1,0 +1,240 @@
+<html lang="en"></html>
+ <head>
+  <body>
+    <header class="bg-gray-900 text-white p-4 shadow-lg fade-in">
+     <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-2xl font-bold md:text-3xl">
+       SIGMA Bioskop
+      </h1>
+      <nav class="hidden md:block">
+       <ul class="flex space-x-4">
+        <li>
+         <a class="hover:text-gray-300" href="dasboard.html">
+          Beranda
+         </a>
+        </li>
+        <li>
+         <a class="hover:text-gray-300" href="#tentang">
+          Tentang
+         </a>
+        </li>
+        <li>
+      <a class="hover:text-gray-300" href="#blog">
+          Blog
+         </a>
+        </li>
+        <li>
+         <a class="hover:text-gray-300" href="index.html">
+          Logout
+         </a>
+        </li>
+       </ul>
+      </nav>
+      <button class="md:hidden" id="menu-button">
+       <i class="fas fa-bars text-xl">
+       </i>
+      </button>
+     </div>
+     <nav class="hidden md:hidden" id="mobile-menu">
+      <ul class="flex flex-col space-y-4 mt-4">
+       <li>
+        <a class="hover:text-gray-300" href="#">
+         Beranda
+        </a>
+       </li>
+        <a class="hover:text-gray-300" href="#">
+         Tentang
+        </a>
+       </li>
+       <li>
+        <a class="hover:text-gray-300" href="#">
+        Blog
+        </a>
+       </li>
+      </li>
+      <li>
+       <a class="hover:text-gray-300" href="#">
+       logout
+       </a>
+      </li>
+      </ul>
+     </nav>
+    </header>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Metode Pembayaran
+  </title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <style>
+   body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #1f1c2c 0%, #928dab 100%);
+      margin: 0;
+      padding: 0;
+    }
+    .selected {
+      border: 2px solid #007bff;
+    }
+  </style>
+ </head>
+ <body class="bg-gray-900">
+  <div class="container mx-auto mt-12 bg-gray-900 p-8 shadow-lg rounded-lg">
+   <div class="header text-center mb-8">
+    <h1 class="text-2xl font-bold text-white">
+     Pilih Metode Pembayaran
+    </h1>
+   </div>
+   <div>
+    <h2 class="section-title text-xl font-semibold text-white mb-4">
+     Transfer Bank
+    </h2>
+    <div class="payment-methods flex flex-wrap gap-4">
+     <div class="payment-method flex-1 bg-gray-800 p-4 rounded-lg text-center cursor-pointer transition duration-300 hover:bg-gray-700" onclick="showDevelopmentPopup()">
+      <img alt="Logo Bank BCA" class="mx-auto mb-2" height="100" src="img/paymend/bca.png" width="100"/>
+      <h3 class="text-lg font-semibold text-white">
+       Bank BCA
+      </h3>
+      <p class="text-sm text-gray-400">
+       Transfer Bank
+      </p>
+     </div>
+     <div class="payment-method flex-1 bg-gray-800 p-4 rounded-lg text-center cursor-pointer transition duration-300 hover:bg-gray-700" onclick="showDevelopmentPopup()">
+      <img alt="Logo Bank Mandiri" class="mx-auto mb-2" height="100" src="img/paymend/mandiri.png" width="100"/>
+      <h3 class="text-lg font-semibold text-white">
+       Bank Mandiri
+      </h3>
+      <p class="text-sm text-gray-400">
+       Transfer Bank
+      </p>
+     </div>
+     <div class="payment-method flex-1 bg-gray-800 p-4 rounded-lg text-center cursor-pointer transition duration-300 hover:bg-gray-700" onclick="showDevelopmentPopup()">
+      <img alt="Logo Bank BNI" class="mx-auto mb-2" height="100" src="img/paymend/bni.png" width="100"/>
+      <h3 class="text-lg font-semibold text-white">
+       Bank BNI
+      </h3>
+      <p class="text-sm text-gray-400">
+       Transfer Bank
+      </p>
+     </div>
+     <div class="payment-method flex-1 bg-gray-800 p-4 rounded-lg text-center cursor-pointer transition duration-300 hover:bg-gray-700" onclick="showDevelopmentPopup()">
+      <img alt="Logo Bank BRI" class="mx-auto mb-2" height="100" src="img/paymend/bri.png" width="100"/>
+      <h3 class="text-lg font-semibold text-white">
+       Bank BRI
+      </h3>
+      <p class="text-sm text-gray-400">
+       Transfer Bank
+      </p>
+     </div>
+    </div>
+   </div>
+   <div class="mt-8">
+    <h2 class="section-title text-xl font-semibold text-white mb-4">
+     E WALLET QRIS
+    </h2>
+    <div class="payment-methods flex flex-wrap gap-4">
+     <div class="payment-method flex-1 bg-gray-800 p-4 rounded-lg text-center cursor-pointer transition duration-300 hover:bg-gray-700" onclick="selectPaymentMethod(this)">
+      <img alt="Logo GoPay" class="mx-auto mb-2" height="100" src="img/paymend/gopay.png" width="100"/>
+      <h3 class="text-lg font-semibold text-white">
+       GoPay
+      </h3>
+      <p class="text-sm text-gray-400">
+       Dompet Digital
+      </p>
+     </div>
+     <div class="payment-method flex-1 bg-gray-800 p-4 rounded-lg text-center cursor-pointer transition duration-300 hover:bg-gray-700" onclick="selectPaymentMethod(this)">
+      <img alt="Logo OVO" class="mx-auto mb-2" height="100" src="img/paymend/ovo.png" width="100"/>
+      <h3 class="text-lg font-semibold text-white">
+       OVO
+      </h3>
+      <p class="text-sm text-gray-400">
+       Dompet Digital
+      </p>
+     </div>
+     <div class="payment-method flex-1 bg-gray-800 p-4 rounded-lg text-center cursor-pointer transition duration-300 hover:bg-gray-700" onclick="selectPaymentMethod(this)">
+      <img alt="Logo Dana" class="mx-auto mb-2" height="100" src="img/paymend/dana.png" width="100"/>
+      <h3 class="text-lg font-semibold text-white">
+       Dana
+      </h3>
+      <p class="text-sm text-gray-400">
+       Dompet Digital
+      </p>
+     </div>
+     <div class="payment-method flex-1 bg-gray-800 p-4 rounded-lg text-center cursor-pointer transition duration-300 hover:bg-gray-700" onclick="selectPaymentMethod(this)">
+      <img alt="Logo ShopeePay" class="mx-auto mb-2" height="100" src="img/paymend/shopepay.png" width="100"/>
+      <h3 class="text-lg font-semibold text-white">
+       ShopeePay
+      </h3>
+      <p class="text-sm text-gray-400">
+       Dompet Digital
+      </p>
+     </div>
+    </div>
+   </div>
+   <div class="button-container text-center mt-8">
+    <button class="bg-blue-500 text-white px-6 py-2 rounded-lg text-lg transition duration-300 hover:bg-blue-700" onclick="confirmPayment()">
+     Konfirmasi Pembayaran
+    </button>
+   </div>
+  </div>
+  <!-- The Modal -->
+  <div class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden" id="developmentModal">
+   <div class="modal-content bg-white p-6 rounded-lg shadow-lg relative">
+    <span class="close absolute top-2 right-2 text-gray-600 text-2xl cursor-pointer" onclick="closeModal()">
+     ×
+    </span>
+    <h2 class="text-xl font-bold mb-4">
+     Fitur Sedang Dalam Pengembangan
+    </h2>
+    <p>
+     Metode pembayaran ini sedang dalam tahap pengembangan. Silakan pilih metode pembayaran lain.
+    </p>
+   </div>
+  </div>
+  <script>
+   function selectPaymentMethod(element) {
+      const methods = document.querySelectorAll('.payment-method');
+      methods.forEach(method => method.classList.remove('selected'));
+      element.classList.add('selected');
+    }
+
+    function confirmPayment() {
+      const selectedMethod = document.querySelector('.payment-method.selected');
+      if (selectedMethod) {
+        const methodName = selectedMethod.querySelector('h3').innerText;
+        const ticketPrice = 22357; // Ganti dengan harga tiket yang sesuai
+
+        // Cek apakah metode yang dipilih adalah e-wallet
+        const eWalletMethods = ['GoPay', 'OVO', 'Dana', 'ShopeePay'];
+        if (eWalletMethods.includes(methodName)) {
+          // Arahkan ke halaman QRIS dengan harga tiket
+          window.location.href = `qris.html?price=${ticketPrice}`;
+        } else {
+          alert('Anda telah memilih ' + methodName + ' sebagai metode pembayaran.');
+        }
+      } else {
+        alert('Silakan pilih metode pembayaran terlebih dahulu.');
+      }
+    }
+
+    function showDevelopmentPopup() {
+      document.getElementById('developmentModal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('developmentModal').classList.add('hidden');
+    }
+
+    // Close the modal when the user clicks anywhere outside of the modal
+    window.onclick = function(event) {
+      const modal = document.getElementById('developmentModal');
+      if (event.target === modal) {
+        modal.classList.add('hidden');
+      }
+    }
+  </script>
+ </body>
+</html>
